@@ -1,0 +1,9 @@
+# to apply new changes added to in cdk.json: "@aws-cdk/core:newStyleStackSynthesis": "true"
+cdk bootstrap
+
+git remote add origin git@github.com:jvargh/cdk-pipelines-webinar.git
+git reset
+git add -A .
+git status
+git push -uf origin master
+
