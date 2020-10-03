@@ -2,7 +2,7 @@ from aws_cdk import core
 from os import path
 from aws_cdk import aws_lambda as lmb
 from aws_cdk import aws_apigateway as apigw
-
+from aws_cdk import aws_codedeploy as codedeploy
 
 class PipelineWebinarStack(core.Stack):
 
@@ -16,7 +16,16 @@ class PipelineWebinarStack(core.Stack):
             handler='handler.handler',
             code=lmb.Code.from_asset(path.join(this_dir,'lambda'))
         )
+        alias = lmb.Alias(self, 'HandlerAlias', version=handler.current_version)
+
         gw = apigw.LambdaRestApi(self,'Gateway for Lambda',
             description='Endpoint for CDK Lambda test',
-            handler=handler.current_version)
+            # handler=handler.current_version)
+            handler=alias)
+
+        codedeploy.LambdaDeploymentGroup(self, 'DeploymentGroup',
+            alias=alias,
+            deployment_config=codedeploy.LambdaDeploymentConfig.LINEAR_10_PERCENT_EVERY_1_MINUTE
+        )
+
         self.url_output = core.CfnOutput(self, 'Url', value=gw.url)
