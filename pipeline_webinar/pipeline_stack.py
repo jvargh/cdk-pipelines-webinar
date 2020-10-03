@@ -39,10 +39,10 @@ class PipelineStack(core.Stack):
         pre_prod_stage = pipeline.add_application_stage(app_stage=pre_prod_app)
         # pre_prod_stage.add_manual_approval_action(action_name='Promote_To_Prod')
 
-        # shell script using source_art folder to run cmds and using user_op will
-        # populate env var SERVICE_URL with the o/p of apigw
+        # shell script using source_art as input content to run cmds. Using user_op will
+        # populate env var SERVICE_URL with the o/p of apigw and run integtests
         pre_prod_stage.add_actions(pipelines.ShellScriptAction(
-            action_name='Integration_Script',
+            action_name='Integration_Test',
             run_order=pre_prod_stage.next_sequential_run_order(),
             additional_artifacts=[source_artifact],
             commands=['pip install -r requirements.txt', 'pytest integtests'],
