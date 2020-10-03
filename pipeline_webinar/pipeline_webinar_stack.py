@@ -16,7 +16,9 @@ class PipelineWebinarStack(core.Stack):
             handler='handler.handler',
             code=lmb.Code.from_asset(path.join(this_dir,'lambda'))
         )
-        alias = lmb.Alias(self, 'HandlerAlias', version=handler.current_version)
+        alias = lmb.Alias(self, 'HandlerAlias',
+            alias_name='Current',
+            version=handler.current_version)
 
         gw = apigw.LambdaRestApi(self,'Gateway for Lambda',
             description='Endpoint for CDK Lambda test',
