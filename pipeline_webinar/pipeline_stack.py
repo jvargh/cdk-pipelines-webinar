@@ -3,7 +3,7 @@ from aws_cdk import aws_codepipeline as cp
 from aws_cdk import aws_codepipeline_actions as cpa
 from aws_cdk import pipelines
 
-from webservice_stage import WebServiceStage
+from .webservice_stage import WebServiceStage
 
 class PipelineStack(core.Stack):
     def __init__(self, scope: core.Construct, id: str, **kwargs):

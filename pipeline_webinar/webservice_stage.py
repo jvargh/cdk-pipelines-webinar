@@ -2,7 +2,7 @@ from aws_cdk import core
 from os import path
 from aws_cdk import aws_lambda as lmb
 from aws_cdk import aws_apigateway as apigw
-from pipeline_webinar_stack import PipelineWebinarStack
+from .pipeline_webinar_stack import PipelineWebinarStack
 
 class WebServiceStage(core.Stage):
 
