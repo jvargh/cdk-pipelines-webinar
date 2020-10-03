@@ -4,6 +4,7 @@ cdk bootstrap
 git remote add origin git@github.com:jvargh/cdk-pipelines-webinar.git
 git reset
 git add -A .
+git commit -m "Initial commit"
 git status
 git push -uf origin master
 
