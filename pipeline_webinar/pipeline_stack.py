@@ -31,11 +31,25 @@ class PipelineStack(core.Stack):
                 build_command='pytest unittests',
                 synth_command='cdk synth')
         )
-        pre_prod_stage = pipeline.add_application_stage(app_stage=WebServiceStage(self,'Pre-Prod', env={
+
+        pre_prod_app = WebServiceStage(self,'Pre-Prod', env={
             'account': '524517701320',
             'region': 'us-east-1'
-        }))
-        pre_prod_stage.add_manual_approval_action(action_name='Promote_To_Prod')
+        })
+        pre_prod_stage = pipeline.add_application_stage(app_stage=pre_prod_app)
+        # pre_prod_stage.add_manual_approval_action(action_name='Promote_To_Prod')
+
+        # shell script using source_art folder to run cmds and using user_op will
+        # populate env var SERVICE_URL with the o/p of apigw
+        pre_prod_stage.add_actions(pipelines.ShellScriptAction(
+            action_name='Integration_Script',
+            run_order=pre_prod_stage.next_sequential_run_order(),
+            additional_artifacts=[source_artifact],
+            commands=['pip install -r requirements.txt', 'pytest integtests'],
+            use_outputs={
+                'SERVICE_URL': pipeline.stack_output(pre_prod_app.url_output)
+            }
+        ))
 
         pipeline.add_application_stage(app_stage=WebServiceStage(self,'Prod', env={
             'account': '524517701320',
