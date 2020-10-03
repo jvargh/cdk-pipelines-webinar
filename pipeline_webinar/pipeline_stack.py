@@ -30,7 +30,13 @@ class PipelineStack(core.Stack):
                 install_command='npm install -g aws-cdk && pip install -r requirements.txt',
                 synth_command='cdk synth')
         )
-        pipeline.add_application_stage(app_stage=WebServiceStage(self,'Pre-Prod', env={
+        pre_prod_stage = pipeline.add_application_stage(app_stage=WebServiceStage(self,'Pre-Prod', env={
+            'account': '524517701320',
+            'region': 'us-east-1'
+        }))
+        pre_prod_stage.add_manual_approval_action(action_name='Promote_To_Prod')
+
+        pipeline.add_application_stage(app_stage=WebServiceStage(self,'Prod', env={
             'account': '524517701320',
             'region': 'us-east-1'
         }))
