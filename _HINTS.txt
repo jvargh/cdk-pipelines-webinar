@@ -8,3 +8,4 @@ git commit -m "Initial commit"
 git status
 git push -uf origin master
 
+git revert HEAD    > to revert to last working state followed by 'git push'
