@@ -26,6 +26,7 @@ class PipelineWebinarStack(core.Stack):
             # handler=handler.current_version)
             handler=alias)
 
+        # after adding 500 to Lambda, below alarm gets triggered and build fails
         failure_alarm = cloudwatch.Alarm(self, 'FailureAlarm',
             metric=cloudwatch.Metric(
                 metric_name='5XXError',

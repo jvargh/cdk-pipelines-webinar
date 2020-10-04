@@ -1,3 +1,7 @@
+Initially deploy pipeline_stack.py which creates Pipelines. After which just commit code to Github which
+triggers pipeline to upload code and deploys
+
+---
 # to apply new changes added to in cdk.json: "@aws-cdk/core:newStyleStackSynthesis": "true"
 cdk bootstrap
 
