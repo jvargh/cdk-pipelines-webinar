@@ -3,11 +3,11 @@ import json
 def handler(event, context):
   print('request: {}'.format(json.dumps(event)))
   return {
-    'statusCode': 200,
+    'statusCode': 500,
     'headers': {
       'Content-Type': 'text/plain'
     },
-    'body': 'V2. Hello, CDK ! You have hit {}\n'.format(event['path'])
+    'body': 'OOOOPS...V2. Hello, CDK ! You have hit {}\n'.format(event['path'])
 
   }
 

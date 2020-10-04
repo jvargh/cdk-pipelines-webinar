@@ -31,7 +31,7 @@ class PipelineWebinarStack(core.Stack):
                 metric_name='5XXError',
                 namespace='AWS/ApiGateway',
                 dimensions={
-                    'ApiName':'Gateway-CDK-Lambda',
+                    'ApiName':'Gateway-CDK-Lambda', # Refer to CDK above
                 },
                 statistic='Sum',
                 period=core.Duration.minutes(1)
