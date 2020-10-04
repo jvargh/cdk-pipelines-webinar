@@ -33,7 +33,7 @@ class PipelineStack(core.Stack):
         )
 
         pre_prod_app = WebServiceStage(self,'Pre-Prod', env={
-            'account': '524517701320',
+            'account': 'ACCT#',
             'region': 'us-east-1'
         })
         pre_prod_stage = pipeline.add_application_stage(app_stage=pre_prod_app)
