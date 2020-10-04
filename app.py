@@ -9,7 +9,7 @@ from pipeline_webinar.pipeline_stack import PipelineStack
 app = core.App()
 # PipelineWebinarStack(app, "pipelines-webinar")
 PipelineStack(app,"PipelineStack", env={
-    'account': '524517701320',
+    'account': 'ACCT#',
     'region': 'us-east-1'
 })
 
